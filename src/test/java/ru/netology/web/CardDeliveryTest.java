@@ -22,7 +22,7 @@ public class CardDeliveryTest {
 
         open("http://localhost:9999");
 
-        // Первое бронирование
+        // первая бронь
         $("[data-test-id='city'] input")
                 .setValue(user.getCity());
 
@@ -44,7 +44,7 @@ public class CardDeliveryTest {
                 .findBy(Condition.text("Запланировать"))
                 .click();
 
-        // Проверяем первое успешное бронирование
+        // проверка первого успешного бронирования
         $$(".notification__title")
                 .findBy(Condition.visible)
                 .shouldHave(Condition.text("Успешно!"), Duration.ofSeconds(15));
@@ -56,7 +56,7 @@ public class CardDeliveryTest {
                         Duration.ofSeconds(15)
                 );
 
-        // Повторно вводим те же данные, но с другой датой
+        // ввела те же данные, но с другой датой
 
         $("[data-test-id='city'] input")
                 .sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE);
@@ -78,12 +78,12 @@ public class CardDeliveryTest {
         $("[data-test-id='phone'] input")
                 .setValue(user.getPhone());
 
-        // Отправляем форму второй раз
+        // отправка формы второй раз
         $$("button")
                 .findBy(Condition.text("Запланировать"))
                 .click();
 
-        // Проверяем окно подтверждения перепланирования
+        // проверка окна подтверждения перепланирования
         $$(".notification")
                 .findBy(Condition.text("Необходимо подтверждение"))
                 .shouldBe(Condition.visible, Duration.ofSeconds(15));
